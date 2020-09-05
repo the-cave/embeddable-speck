@@ -39,7 +39,6 @@ static void embeddable_speck__poll(
   if (step < (1 + EMBEDDABLE_SPECK__ROUND)) {
     // perform cryptographic round
     round_handler(config, state);
-
     state->step++;
     return;
   }
@@ -87,8 +86,8 @@ static void encryption_round(EmbeddableSpeck_Config *config,
   ER64((state->scratch_pad[1]), (state->scratch_pad[0]), round_key);
 }
 
-static void embeddable_speck__encryption_poll(EmbeddableSpeck_Config *config,
-                                              EmbeddableSpeck_State *state) {
+void embeddable_speck__encryption_poll(EmbeddableSpeck_Config *config,
+                                       EmbeddableSpeck_State *state) {
   embeddable_speck__poll(config, state, &encryption_round);
 }
 
@@ -104,7 +103,7 @@ static void decryption_round(EmbeddableSpeck_Config *config,
   DR64((state->scratch_pad[1]), (state->scratch_pad[0]), round_key);
 }
 
-static void embeddable_speck__decryption_poll(EmbeddableSpeck_Config *config,
-                                              EmbeddableSpeck_State *state) {
+void embeddable_speck__decryption_poll(EmbeddableSpeck_Config *config,
+                                       EmbeddableSpeck_State *state) {
   embeddable_speck__poll(config, state, &decryption_round);
 }
