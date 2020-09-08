@@ -17,9 +17,7 @@
 #include <stdint.h>
 
 typedef struct _embeddable_speck__config {
-  uint64_t key_schedule[EMBEDDABLE_SPECK__ROUND];
-  void (*started)(uint8_t *accepted_input);
-  void (*rejected)(uint8_t *rejected_input);
+  uint64_t *key_schedule;
   void (*finished)(uint8_t *result);
 } EmbeddableSpeck_Config;
 
@@ -34,13 +32,14 @@ typedef struct _embeddable_speck__state {
     (state)->step = 0;                                                         \
   } while (0)
 
-void embeddable_speck__start(EmbeddableSpeck_Config *config,
-                             EmbeddableSpeck_State *state, uint8_t *data);
+bool embeddable_speck__start(EmbeddableSpeck_State *state, uint8_t *data);
 
-void embeddable_speck__encryption_poll(EmbeddableSpeck_Config *config,
-                                       EmbeddableSpeck_State *state);
+void embeddable_speck__encryption_poll(
+    const EmbeddableSpeck_Config *config,
+    EmbeddableSpeck_State *state);
 
-void embeddable_speck__decryption_poll(EmbeddableSpeck_Config *config,
-                                       EmbeddableSpeck_State *state);
+void embeddable_speck__decryption_poll(
+    const EmbeddableSpeck_Config *config,
+    EmbeddableSpeck_State *state);
 
 #endif
