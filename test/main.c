@@ -3,9 +3,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-// the test vector was obtained from
-// https://nsacyber.github.io/simon-speck/implementations/ImplementationGuide1.1.pdf
-
 static const uint64_t key_schedule[EMBEDDABLE_SPECK__ROUND] = {
     0x0706050403020100, 0x37253b31171d0309, 0xf91d89cc90c4085c,
     0xc6b1f07852cc7689, 0x014fcdf4f9c2d6f0, 0xb5fae1e4fe24cfd6,
@@ -19,6 +16,9 @@ static const uint64_t key_schedule[EMBEDDABLE_SPECK__ROUND] = {
     0x24cf1f1879819519, 0x38a36ed2dbafb72a, 0xded93cfe31bae304,
     0xc53d18b91770b265, 0x2199c870db8ec93f,
 };
+
+// the test vector was obtained from
+// https://nsacyber.github.io/simon-speck/implementations/ImplementationGuide1.1.pdf
 
 static const uint8_t plain_text[EMBEDDABLE_SPECK__BLOCK_SIZE] = {
     0x20,
@@ -109,7 +109,6 @@ static void decrypted_handler(uint8_t *result) {
   } else {
     puts("Decryption test FAILED");
   }
-  embeddable_speck__start(&decryption_state, result);
 }
 
 static bool decryption_check(uint8_t *result) {

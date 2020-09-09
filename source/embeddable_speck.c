@@ -17,9 +17,8 @@
 #endif
 
 bool embeddable_speck__start(EmbeddableSpeck_State *state, uint8_t *data) {
-  if (state->step != 0) {
+  if (state->step != 0)
     return false; // rejected
-  }
 #ifdef __REQUIRE_SWAP
   state->scratch_pad[0] = bswap_64(((uint64_t *)data)[0]);
   state->scratch_pad[1] = bswap_64(((uint64_t *)data)[1]);
@@ -38,18 +37,17 @@ static void embeddable_speck__poll(
         const EmbeddableSpeck_Config *,
         EmbeddableSpeck_State *)) {
   uint8_t step = state->step;
-  if (step < 1) {
-    // nothing to do
+  // nothing to do
+  if (step < 1)
     return;
-  }
+  // perform cryptographic round
   if (step < (1 + EMBEDDABLE_SPECK__ROUND)) {
-    // perform cryptographic round
     round_handler(config, state);
     state->step++;
     return;
   }
+  // normalize output
   if (step < (1 + EMBEDDABLE_SPECK__ROUND + 1)) {
-    // normalize output
     uint64_t *output = (uint64_t *)state->output;
     uint64_t *raw = state->scratch_pad;
 
@@ -64,10 +62,9 @@ static void embeddable_speck__poll(
     return;
   }
   // emit and reset
-  if (config->finished) {
-    config->finished(state->output);
-  }
   state->step = 0;
+  if (config->finished)
+    config->finished(state->output);
 }
 
 #define ER64(x, y, k)                                                          \
