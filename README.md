@@ -21,7 +21,7 @@ The goal of Embeddable Speck is to make the cipher more suitble for [PSK](https:
 * The algorithm was designed by NSA.
 * PSK nature of the library, with a static key, and without a key-exchange mechanism whatsoever, make the device adopting this library susceptible to key-recovery attacks by reverse engineering.
 * At best, the library can be used for your DIY remote-controlled door locker, assuming that you do not use it to lock anything NSA or the US government would care about.
-* Safer alternatives available. (Try [SPARX](https://www.cryptolux.org/index.php/SPARX) if you have no idea.)
+* Safer alternatives available. (Try [Embeddable SPARX](https://github.com/the-cave/embeddable-sparx) instead; different algorithm, same API)
 
 ## Porting
 No need, the code is hardware and platform agnostic. It will run everywhere as long as C language works. You can even [run the test](#Testing) on your PC.
@@ -88,6 +88,11 @@ If there is nothing to be done the function would return right away; costing onl
 ## Testing
 
 Just clone the repository with submodules and `make run`.
+
+## Less controversy one
+
+Please note that non-NSA-designed algorithm is available with the exact same API.
+See [Embeddable SPARX](https://github.com/the-cave/embeddable-sparx).
 
 ## License
 
