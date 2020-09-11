@@ -96,4 +96,4 @@ See [Embeddable SPARX](https://github.com/the-cave/embeddable-sparx).
 
 ## License
 
-Consuming Tester is released under the [BSD 3-Clause License](LICENSE.md). :tada:
+Embeddable Speck is released under the [BSD 3-Clause License](LICENSE.md). :tada:
